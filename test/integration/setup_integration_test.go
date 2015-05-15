@@ -25,14 +25,19 @@ func TestMain(m *testing.M) {
 	var t *testing.T
 	var err error
 
-	driver = agouti.Selenium()
-	driver.Start()
+	command := []string{"java", "-jar", "selenium-server-standalone-2.44.0.jar", "-port", "9090"}
+	driver = agouti.NewWebDriver("http://localhost:9090/wd/hub", command)
+	// driver = agouti.Selenium()
+	driverErr := driver.Start()
+	if driverErr != nil {
+		panic(driverErr)
+	}
 
 	go Start(PORT)
 
 	page, err = driver.NewPage(agouti.Browser("chrome"))
 	if err != nil {
-		t.Error("Failed to open page.")
+		panic(err)
 	}
 
 	RegisterTestingT(t)
