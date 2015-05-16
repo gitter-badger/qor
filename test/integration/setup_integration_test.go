@@ -25,9 +25,9 @@ func TestMain(m *testing.M) {
 	var t *testing.T
 	var err error
 
-	command := []string{"java", "-jar", "selenium-server-standalone-2.44.0.jar", "-port", "9090"}
-	driver = agouti.NewWebDriver("http://localhost:9090/wd/hub", command)
-	// driver = agouti.Selenium()
+	// command := []string{"java", "-jar", "selenium-server-standalone-2.44.0.jar", "-port", "9090"}
+	// driver = agouti.NewWebDriver("http://localhost:9090/wd/hub", command)
+	driver = agouti.ChromeDriver()
 	driverErr := driver.Start()
 	if driverErr != nil {
 		panic(driverErr)
